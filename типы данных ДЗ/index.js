@@ -1,29 +1,46 @@
-let inp = document.querySelector('.inp');
-// console.log(inp)
-let plas = document.querySelector('.plas');
+let a1 = 0.1;
+let a2 = 0.2;
+let res1_1 = document.querySelector('.res1-1').innerHTML = a1 + a2;
 
-let min = document.querySelector('.min');
-let out = document.querySelector('.out');
-console.log(out)
+let b1 = +'1';
+let b2 = 2;
+document.querySelector('.res1-2').innerHTML = b1 + b2;
 
-
-plas.onclick = () => {
-    if (inp.value < 10) {
-        out.innerHTML = ++inp.value;
-    }
+const file = 850;
+let vol = document.querySelector('.vol');
+let fileButton = document.querySelector('.fileButton');
+let amount = document.querySelector('.amount');
+let rem = document.querySelector('.rem')
+fileButton.onclick = () => {
+    amount.innerHTML = Math.floor(vol.value / file);
+    rem.innerHTML = vol.value % file;
 }
 
-min.onclick = () => {
-    if (inp.value > -1) {
-        out.innerHTML = --inp.value;
-    }
+// -----------------------------------------------------
+
+const file1 = 10.5;
+let hrn = document.querySelector('.hrn');
+
+let fileButton1 = document.querySelector('.fileButton1');
+let choco = document.querySelector('.choco');
+let rem1 = document.querySelector('.rem1')
+fileButton1.onclick = () => {
+    choco.innerHTML = Math.floor(hrn.value / file1);
+    rem1.innerHTML = hrn.value % file1;
 }
 
-inp2 = document.querySelector('.inp2')
-res = document.querySelector('.res')
-// console.log(res);
-if (inp2.value || 10) {
-    res.innerHTML = 'good';
-} else {
-    res.innerHTML = 'no-good';
+// -------------------------------------------------------
+
+const per = 1.05;
+let sum = document.querySelector('.sum');
+let month = document.querySelector('.month');
+let checkMoney = document.querySelector('.checkMoney');
+let sumPer = document.querySelector('.sumPer');
+checkMoney.onclick = () => {
+    sumPer.innerHTML = ((sum.value * per) * month.value) - sum.value*month.value;
 }
+
+
+console.log(2 && 0 && 1);
+console.log(2 || 0 || 1);
+console.log(2 && 0 || 1);
