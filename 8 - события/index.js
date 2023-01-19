@@ -1,11 +1,6 @@
-catSerch = document.querySelector('.cat-serch');
-catSelect = document.querySelector('.cat-select');
-fromBottom = document.querySelector('.fromBottom');
-btnselect = document.querySelector('.btn-select');
-fromBottom = document.querySelector('.fromBottom');
-fromTop = document.querySelector('.fromTop');
+const out = document.querySelector('#root');
 
-
+// -----array pets---------------
 const pets = [{
         name: "Скоттиш фолд", // Порода
         description: 'Золотой шотландский вислоухий кот ждет в гости кошечку для совместного времяпровождения. Одной встречи достаточно для получения красивого и здорового потомства. У полуторагодовалого',
@@ -45,23 +40,34 @@ const pets = [{
 
 ]
 
-/* <div class="pets__item"> 
-      <h3 class="pets__name">${pet.name}</h3>
-      <img class="pets__img" src="${pet.url}" alt="">
-      <div class="pets__price">${pet.price}</div>
-      <p class="pets__description">${pet.description}</p>
-      <h5 class="pets__loc">${pet.location}</h5>
-    </div> */
+// ------------------------------------------------
 
+let wrapper = document.createElement('div');
+wrapper.classList.add('wrapper');
+out.append(wrapper);
 
+// ----nav-------
 
+let nav = document.createElement('nav');
+nav.classList.add('wrapper__nav');
+wrapper.append(nav);
 
-const out = document.querySelector('.pets__container')
+// -----search-------
 
-//  pets.map()
-// 1-Item, 2-index, 3-array 
-pets.map((pet) => {
-    out.innerHTML += `
+let inputSearch = document.createElement('input');
+inputSearch.classList.add('input-search');
+nav.append(inputSearch);
+
+let inputBtn = document.createElement('button');
+inputBtn.classList.add('input-btn');
+nav.append(inputBtn);
+inputBtn.innerHTML = 'Search';
+
+inputBtn.onclick = () => {
+    outRes.innerHTML = '' ;
+    pets.filter((pet) => {
+        if (pet.name == inputSearch.value) {            
+            outRes.innerHTML += `
     <div class="pets__item"> 
       <h3 class="pets__name">${pet.name}</h3>
       <img class="pets__img" src="${pet.url}" alt="">
@@ -69,89 +75,82 @@ pets.map((pet) => {
       <p class="pets__description">${pet.description}</p>
       <h5 class="pets__loc">${pet.location}</h5>
     </div>
-    `
+    `;
+        }
+    })
+}
+
+// ---------select-----
+
+let selectNav = document.createElement('select');
+selectNav.classList.add('nav__select');
+nav.append(selectNav);
+
+let option = document.createElement('option');
+selectNav.append(option);
+option.innerHTML = 'Другая';
+
+let option1 = document.createElement('option');
+selectNav.append(option1);
+option1.innerHTML = 'Скоттиш фолд';
+
+let option2 = document.createElement('option');
+selectNav.append(option2);
+option2.innerHTML = 'Экзотическая короткошерстная';
+
+let selectBtn = document.createElement('button');
+selectBtn.classList.add('select-btn')
+nav.append(selectBtn);
+selectBtn.innerHTML = 'Select';
+
+selectBtn.onclick = () => {
+    outRes.innerHTML = '' ;
+    pets.filter((pet) => {
+        if (pet.name == selectNav.value) {            
+            outRes.innerHTML += `
+    <div class="pets__item"> 
+      <h3 class="pets__name">${pet.name}</h3>
+      <img class="pets__img" src="${pet.url}" alt="">
+      <div class="pets__price">${pet.price}</div>
+      <p class="pets__description">${pet.description}</p>
+      <h5 class="pets__loc">${pet.location}</h5>
+    </div>
+    `;
+        }
+    })
+}
+
+// -------out resalts--------------------------
+
+let outRes = document.createElement('div');
+outRes.classList.add('nav__out-resalts');
+wrapper.append(outRes);
+
+pets.map((pet) => {
+    outRes.innerHTML += `
+    <div class="pets__item"> 
+      <h3 class="pets__name">${pet.name}</h3>
+      <img class="pets__img" src="${pet.url}" alt="">
+      <div class="pets__price">${pet.price}</div>
+      <p class="pets__description">${pet.description}</p>
+      <h5 class="pets__loc">${pet.location}</h5>
+    </div>
+    `;
 })
 
 
-// let selRes = pets.filter((pet) => {
-    
-//     return pet.name !== catSelect.value
-// })
-// console.log(selRes);
+// ---------------sort prise-----------------------
 
-let resSearch = document.querySelector('.res-search');
-document.querySelector('.btn-serch').onclick = () => {
-    resSearch.innerHTML = '';
-    let res = pets.filter((pet) => {
-        return pet.name == catSerch.value
-    })
-    for (i = 0; i < res.length;i++) {
-        // console.log(res[i].name);
-        resSearch.innerHTML +=  `
-        <div class="pets__item"> 
-          <h3 class="pets__name">${res[i].name}</h3>
-          <img class="pets__img" src="${res[i].url}" alt="">
-          <div class="pets__price">${res[i].price}</div>
-          <p class="pets__description">${res[i].description}</p>
-          <h5 class="pets__loc">${res[i].location}</h5>
-        </div>
-       `
-    }    
-}
-
-btnselect.onclick = () => {
-    out.innerHTML = '';
-    let res = pets.filter((pet) => {
-        return pet.name == catSelect.value
-    })
-    for (i = 0; i < res.length;i++) {
-        // console.log(res[i].name);
-        out.innerHTML +=  `
-        <div class="pets__item"> 
-          <h3 class="pets__name">${res[i].name}</h3>
-          <img class="pets__img" src="${res[i].url}" alt="">
-          <div class="pets__price">${res[i].price}</div>
-          <p class="pets__description">${res[i].description}</p>
-          <h5 class="pets__loc">${res[i].location}</h5>
-        </div>
-       `
-    }    
-}
-
-function getItem () {
-    const addValue = [];
-    for ( let option of document.querySelector('.cat-select').option){
-        addValue.push(option.value);
-        console.log(addValue[0]);
-    }
-}
-
-getItem()
-
-
-
-fromBottom.onclick = () => {
-    out.innerHTML = '';
-    const sorted = pets.sort((pet1, pet2) => parseInt(pet1.price) > parseInt(pet2.price) ? 1 : -1)
-    console.log(sorted);
-    for (i = 0; i < sorted.length; i++) {
-        out.innerHTML +=  `
-        <div class="pets__item"> 
-          <h3 class="pets__name">${sorted[i].name}</h3>
-          <img class="pets__img" src="${sorted[i].url}" alt="">
-          <div class="pets__price">${sorted[i].price}</div>
-          <p class="pets__description">${sorted[i].description}</p>
-          <h5 class="pets__loc">${sorted[i].location}</h5>
-        </div>
-       `
-    }
-}
+let fromTop = document.createElement('button');
+fromTop.classList.add('from-top');
+nav.append(fromTop);
+fromTop.innerHTML = 'От дорогих к дешевым'
 
 fromTop.onclick = () => {
-    out.innerHTML = '';
+    outRes.innerHTML = '';
     const sorted = pets.sort((pet1, pet2) => parseInt(pet1.price) > parseInt(pet2.price) ? -1 : 1)    
     for (i = 0; i < sorted.length; i++) {
-        out.innerHTML +=  `
+        outRes.innerHTML +=  `
         <div class="pets__item"> 
           <h3 class="pets__name">${sorted[i].name}</h3>
           <img class="pets__img" src="${sorted[i].url}" alt="">
@@ -163,30 +162,24 @@ fromTop.onclick = () => {
     }
 }
 
+let fromBottom = document.createElement('button');
+fromBottom.classList.add('from-bottom');
+nav.append(fromBottom);
+fromBottom.innerHTML = 'От дешевых к дорогим'
 
+fromBottom.onclick = () => {
+    outRes.innerHTML = '';
+    const sorted = pets.sort((pet1, pet2) => parseInt(pet1.price) > parseInt(pet2.price) ? 1 : -1)    
+    for (i = 0; i < sorted.length; i++) {
+        outRes.innerHTML +=  `
+        <div class="pets__item"> 
+          <h3 class="pets__name">${sorted[i].name}</h3>
+          <img class="pets__img" src="${sorted[i].url}" alt="">
+          <div class="pets__price">${sorted[i].price}</div>
+          <p class="pets__description">${sorted[i].description}</p>
+          <h5 class="pets__loc">${sorted[i].location}</h5>
+        </div>
+       `
+    }
+}
 
-// fromBottom.onclick = () => {
-//     let sortcat = pets.sort();
-//     for (i = 0; i < sortcat.length; i++) {
-
-//     }
-
-// }
-
-let a = '555 гр';
-let b = parseInt(a)
-
-
-
-
-// pets.sort();
-//     out.innerHTML += `
-// <div class="pets__item"> 
-//   <h3 class="pets__name">${pet.name}</h3>
-//   <img class="pets__img" src="${pet.url}" alt="">
-//   <div class="pets__price">${pet.price}</div>
-//   <p class="pets__description">${pet.description}</p>
-//   <h5 class="pets__loc">${pet.location}</h5>
-// </div>
-// `    
-// }

@@ -12,7 +12,8 @@ function showArr(domElem, arr) {
 let d1 = [33, 'best', 66, 'best'];
 
 function f1() {
-    
+    let i1 = document.querySelector('.i-1').value
+    d1.push(i1)
     showArr('.out-1', d1);
 }
 
@@ -23,7 +24,7 @@ document.querySelector('.b-1').onclick = f1;
 // функция выполняется при нажатии кнопки b-2
 
 function f2() {
-
+    d1.pop()
     showArr('.out-2', d1);
 }
 
@@ -34,8 +35,10 @@ document.querySelector('.b-2').onclick = f2;
 // функция выполняется при нажатии кнопки b-3
 
 function f3() {
-
+    let q
+    d1.shift(q)
     showArr('.out-3', d1);
+    console.log(q);
 }
 
 document.querySelector('.b-3').onclick = f3;
@@ -46,7 +49,9 @@ document.querySelector('.b-3').onclick = f3;
 
 
 function f4() {
-
+    let i4 = document.querySelector('.i-4').value;
+    d1.push(i4)
+    console.log(i4);
     showArr('.out-4', d1);
 }
 
@@ -57,7 +62,8 @@ document.querySelector('.b-4').onclick = f4;
 // функция выполняется при нажатии кнопки b-5
 
 function f5() {
-
+    let i5 = document.querySelector('.i-5').value;
+    d1.unshift(i5)
     showArr('.out-5', d1);
 }
 
@@ -72,7 +78,8 @@ document.querySelector('.b-5').onclick = f5;
 let d6 = ['test', 5, 12];
 
 function f6() {
-
+    let i6 = document.querySelector('.i-6').value;
+    d6[d6.length] = i6;
     showArr('.out-6', d6);
 }
 
@@ -87,7 +94,10 @@ document.querySelector('.b-6').onclick = f6;
 let d7 = ['china', 'india', 'brazil', 'japan', 'egypt'];
 
 function f7() {
-
+    let q = ''
+    if (d7.length !== 0) {
+        d7[d7.length - 1] = q
+    }
     showArr('.out-7', d7);
 }
 
@@ -102,10 +112,13 @@ document.querySelector('.b-7').onclick = f7;
 let d8 = [2, '4', 12, 67, 'hello'];
 
 function f8() {
-
+    let ar = document.querySelector('.i-8').value;
+    for (let i = d8.length - 1; i >= 0; --i) {
+        d8[i + 1] = d8[i];        
+    }
+    d8[0] = ar;
     showArr('.out-8', d8);
 }
-
 document.querySelector('.b-8').onclick = f8;
 
 // Task 9
@@ -117,7 +130,7 @@ document.querySelector('.b-8').onclick = f8;
 let d9 = [100, 200, 300, 400, 700, 121];
 
 function f9() {
-
+    
     showArr('.out-9', d9);
 }
 
